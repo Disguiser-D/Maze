@@ -1,0 +1,30 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/17289/CLionProjects/maze/allmazeaccess.h
+stdio.h
+-
+string.h
+-
+
+C:/Users/17289/CLionProjects/maze/loadmaze.h
+iostream
+-
+fstream
+-
+
+C:/Users/17289/CLionProjects/maze/main.cpp
+iostream
+-
+fstream
+-
+loadmaze.h
+C:/Users/17289/CLionProjects/maze/loadmaze.h
+allmazeaccess.h
+C:/Users/17289/CLionProjects/maze/allmazeaccess.h
+
