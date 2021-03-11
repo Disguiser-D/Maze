@@ -2,8 +2,8 @@
 
 #include<fstream>
 
-#include "loadmaze.h"
-#include "allmazeaccess.h"
+#include "include/loadmaze.h"
+#include "include/allmazeaccess.h"
 
 int main()
 {

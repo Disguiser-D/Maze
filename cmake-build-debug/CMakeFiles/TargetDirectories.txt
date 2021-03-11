@@ -1,3 +1,0 @@
-C:/Users/17289/CLionProjects/maze/cmake-build-debug/CMakeFiles/maze.dir
-C:/Users/17289/CLionProjects/maze/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/17289/CLionProjects/maze/cmake-build-debug/CMakeFiles/rebuild_cache.dir
