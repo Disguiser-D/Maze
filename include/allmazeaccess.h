@@ -35,27 +35,26 @@ typedef struct
     int length;			//路径长度
 } PathType;				//定义路径类型
 int count=0;			//存放迷宫路径的条数
-int test(int x1,int y1,int x2,int y2){
+int test(int x1,int y1,int x2,int y2) {
     //printf("%d,%d,%d,%d",x1,y1,x2,y2);
-    if (x2 == -1 && y2 == -1){
+    if (x2 == -1 && y2 == -1) {
         //已完成寻路
         return 0;
     }
-    if (x1==x2){
+    if (x1 == x2) {
         //左右移动
-        if (y2<y1){
+        if (y2 < y1) {
             //向左移动
             return 3;
-        }else{
+        } else {
             return 1;
         }
-    }
-    else if (y1 == y2){
+    } else if (y1 == y2) {
         //上下移动
-        if (x2<x1){
+        if (x2 < x1) {
             //向上移动
             return 4;
-        }else{
+        } else {
             return 2;
         }
     }
