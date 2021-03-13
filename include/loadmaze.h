@@ -16,44 +16,38 @@
  * Parameter:String(需要读取数据的文件名)
  * Return:int**(创建的动态二维数组的指针,若返回的是空指针则是非法迷宫)
  */
-int** CreateMaze(const std::string& fileName)
-{
-    std::fstream inFile(fileName,std::ios::in);
-    if(!inFile)std::cout<<"文件打开失败"<<std::endl;
-
+int **CreateMaze(const std::string &fileName) {
+    std::fstream inFile(fileName, std::ios::in);
+    if (!inFile)std::cout << "文件打开失败" << std::endl;
+    std::string aa = fileName;
     //读取迷宫大小
-    int mazeSize,xi,yi,xe,ye;
-    inFile>>mazeSize;
+    int mazeSize, xi, yi, xe, ye;
+    inFile >> mazeSize;
 
     //读取迷宫的起点和终点数据
-    inFile>>xi>>yi;
-    inFile>>xe>>ye;
+    inFile >> xi >> yi;
+    inFile >> xe >> ye;
 
 
     //创建动态二维数组
-    int **m=new int*[mazeSize+2];
-    for(int i=0;i<mazeSize+2;i++)
-    {
-        m[i]=new int[mazeSize+2];
+    int **m = new int *[mazeSize + 2];
+    for (int i = 0; i < mazeSize + 2; i++) {
+        m[i] = new int[mazeSize + 2];
     }
 
 
     //全部赋值为1 间接建墙
-    for(int i=0;i<mazeSize+2;i++)
-    {
-        for(int j=0;j<mazeSize+2;j++)
-        {
-            m[i][j]=1;
+    for (int i = 0; i < mazeSize + 2; i++) {
+        for (int j = 0; j < mazeSize + 2; j++) {
+            m[i][j] = 1;
         }
 
     }
 
     //读取迷宫数据
-    for(int i = 1; i <= mazeSize; i++)
-    {
-        for(int j = 1; j <= mazeSize; j++)
-        {
-            inFile>>m[i][j];
+    for (int i = 1; i <= mazeSize; i++) {
+        for (int j = 1; j <= mazeSize; j++) {
+            inFile >> m[i][j];
             //如果不是1或者0则为非法数据，返回空指针
             if (m[i][j] == 1 || m[i][j] == 0);
             else return nullptr;
@@ -61,7 +55,9 @@ int** CreateMaze(const std::string& fileName)
     }
 
     //判断是否为非法迷宫(起点或终点在墙上或越界)
-    if (xi >= mazeSize || yi >= mazeSize || xe >= mazeSize || ye >= mazeSize || xi < 0 || yi < 0 || xe < 0 || ye < 0 ||m[xi+1][yi+1] == 1 || m[xe+1][ye+1] == 1) return nullptr;
+    if (xi >= mazeSize || yi >= mazeSize || xe >= mazeSize || ye >= mazeSize || xi < 0 || yi < 0 || xe < 0 || ye < 0 ||
+        m[xi + 1][yi + 1] == 1 || m[xe + 1][ye + 1] == 1)
+        return nullptr;
 
     inFile.close();
     return m;
@@ -72,16 +68,15 @@ int** CreateMaze(const std::string& fileName)
  * Parameter:String(需要读取数据的文件名)
  * Return:int(起点的X轴数据)
  */
-int LoadStartX(const std::string& fileName)
-{
-    std::fstream inFile(fileName,std::ios::in);
-    if(!inFile)std::cout<<"文件打开失败"<<std::endl;
+int LoadStartX(const std::string &fileName) {
+    std::fstream inFile(fileName, std::ios::in);
+    if (!inFile)std::cout << "文件打开失败" << std::endl;
 
-    inFile.seekg(std::ios::beg+2);  // 偏移文件指针，直接定位到文本中的迷宫数据，提升效率
+    inFile.seekg(std::ios::beg + 2);  // 偏移文件指针，直接定位到文本中的迷宫数据，提升效率
 
     int xi;
-    inFile>>xi;
-    return xi+1;
+    inFile >> xi;
+    return xi + 1;
 }
 
 /*
@@ -89,16 +84,15 @@ int LoadStartX(const std::string& fileName)
  * Parameter:String(需要读取数据的文件名)
  * Return:int(起点的Y轴数据)
  */
-int LoadStartY(const std::string& fileName)
-{
-    std::fstream inFile(fileName,std::ios::in);
-    if(!inFile)std::cout<<"文件打开失败"<<std::endl;
+int LoadStartY(const std::string &fileName) {
+    std::fstream inFile(fileName, std::ios::in);
+    if (!inFile)std::cout << "文件打开失败" << std::endl;
 
-    inFile.seekg(std::ios::beg+4);  // 偏移文件指针，直接定位到文本中的迷宫数据，提升效率
+    inFile.seekg(std::ios::beg + 4);  // 偏移文件指针，直接定位到文本中的迷宫数据，提升效率
 
     int yi;
-    inFile>>yi;
-    return yi+1;
+    inFile >> yi;
+    return yi + 1;
 }
 
 /*
@@ -106,16 +100,15 @@ int LoadStartY(const std::string& fileName)
  * Parameter:String(需要读取数据的文件名)
  * Return:int(终点的X轴数据)
  */
-int LoadEndX(const std::string& fileName)
-{
-    std::fstream inFile(fileName,std::ios::in);
-    if(!inFile)std::cout<<"文件打开失败"<<std::endl;
+int LoadEndX(const std::string &fileName) {
+    std::fstream inFile(fileName, std::ios::in);
+    if (!inFile)std::cout << "文件打开失败" << std::endl;
 
-    inFile.seekg(std::ios::beg+6);  // 偏移文件指针，直接定位到文本中的迷宫数据，提升效率
+    inFile.seekg(std::ios::beg + 6);  // 偏移文件指针，直接定位到文本中的迷宫数据，提升效率
 
     int xe;
-    inFile>>xe;
-    return xe+1;
+    inFile >> xe;
+    return xe + 1;
 }
 
 /*
@@ -123,16 +116,15 @@ int LoadEndX(const std::string& fileName)
  * Parameter:String(需要读取数据的文件名)
  * Return:int(终点的Y轴数据)
  */
-int LoadEndY(const std::string& fileName)
-{
-    std::fstream inFile(fileName,std::ios::in);
-    if(!inFile)std::cout<<"文件打开失败"<<std::endl;
+int LoadEndY(const std::string &fileName) {
+    std::fstream inFile(fileName, std::ios::in);
+    if (!inFile)std::cout << "文件打开失败" << std::endl;
 
-    inFile.seekg(std::ios::beg+9);  // 偏移文件指针，直接定位到文本中的迷宫数据，提升效率
+    inFile.seekg(std::ios::beg + 9);  // 偏移文件指针，直接定位到文本中的迷宫数据，提升效率
 
     int ye;
-    inFile>>ye;
-    return ye+1;
+    inFile >> ye;
+    return ye + 1;
 }
 
 /*
@@ -140,14 +132,13 @@ int LoadEndY(const std::string& fileName)
  * Parameter:String(需要读取数据的文件名)
  * Return:int(迷宫大小)
  */
-int LoadMazeSize(const std::string& fileName)
-{
-    std::fstream inFile(fileName,std::ios::in);
-    if(!inFile)std::cout<<"文件打开失败"<<std::endl;
+int LoadMazeSize(const std::string &fileName) {
+    std::fstream inFile(fileName, std::ios::in);
+    if (!inFile)std::cout << "文件打开失败" << std::endl;
 
     //读取迷宫大小
     int mazeSize;
-    inFile>>mazeSize;
+    inFile >> mazeSize;
     return mazeSize;
 }
 
