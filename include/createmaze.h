@@ -9,10 +9,10 @@
 
 #include <bits/stdc++.h>
 using namespace std;
-#define down 1
-#define right 2
-#define left 4
-#define up 8
+#define DOWN 1
+#define RIGHT 2
+#define LEFT 4
+#define UP 8
 #define WALL -1
 #define NOTHING 2
 
@@ -62,17 +62,17 @@ void init(int xi,int yi,int size) {
 }
 void FindBlock() {
     //找出与当前位置相邻的墙
-    if(x_num+1<=m && G[x_num+1][y_num] == WALL) {//down
-        myblock.push_back(block(x_num+1,y_num,down));
+    if(x_num+1<=m && G[x_num+1][y_num] == WALL) {//DOWN
+        myblock.push_back(block(x_num+1,y_num,DOWN));
     }
-    if(y_num+1<=n && G[x_num][y_num+1] == WALL) {//right
-        myblock.push_back(block(x_num,y_num+1,right));
+    if(y_num+1<=n && G[x_num][y_num+1] == WALL) {//RIGHT
+        myblock.push_back(block(x_num,y_num+1,RIGHT));
     }
-    if(x_num-1>=1 && G[x_num-1][y_num] == WALL) {//up
-        myblock.push_back(block(x_num-1,y_num,up));
+    if(x_num-1>=1 && G[x_num-1][y_num] == WALL) {//UP
+        myblock.push_back(block(x_num-1,y_num,UP));
     }
-    if(y_num-1>=1 && G[x_num][y_num-1] == WALL) {//left
-        myblock.push_back(block(x_num,y_num-1,left));
+    if(y_num-1>=1 && G[x_num][y_num-1] == WALL) {//LEFT
+        myblock.push_back(block(x_num,y_num-1,LEFT));
     }
 }
 
@@ -94,19 +94,19 @@ int createMaze(int xi,int yi,int size) {
         //我们让矿工从“选择的墙”继续前进到“目标块”
         //矿工有穿墙能力 ：)
         switch(SelectBlock.direction) {
-            case down: {
+            case DOWN: {
                 x_num++;
                 break;
             }
-            case right: {
+            case RIGHT: {
                 y_num++;
                 break;
             }
-            case left: {
+            case LEFT: {
                 y_num--;
                 break;
             }
-            case up: {
+            case UP: {
                 x_num--;
                 break;
             }
