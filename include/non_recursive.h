@@ -35,7 +35,7 @@ bool stackempty(sqstack *s) {
     return (s->next == NULL);
 }
 
-bool push(sqstack *&s, box &e) {
+void push(sqstack *&s, box &e) {
     sqstack *p;
     p = (sqstack *) malloc(sizeof(sqstack));
     p->date = e;
@@ -83,6 +83,7 @@ int context_Compared(int x1, int y1, int x2, int y2) {
             return 2;
         }
     }
+    return -1;
 }
 
 // https://blog.csdn.net/wyh1618/article/details/83547074?utm_medium=distribute.pc_relevant.none-task-blog-baidujs_title-1&spm=1001.2101.3001.4242

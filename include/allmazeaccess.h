@@ -56,6 +56,7 @@ int test(int x1, int y1, int x2, int y2) {
             return 2;
         }
     }
+    return -1;
 }
 
 void mgpath(int xi, int yi, int xe, int ye, PathType path, int **mg)
