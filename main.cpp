@@ -9,6 +9,7 @@ int main() {
     int **maze = CreateMaze(filepath);
     if (maze == nullptr) return -1;
     RunAllAccessBFS(LoadStartX(filepath), LoadStartY(filepath), LoadEndX(filepath), LoadEndY(filepath), maze);
+    return 0;
 //    for(unsigned int i=0;i<=8;i++) {
 //        std::cout<<b[i][i]<<endl;
 //    }

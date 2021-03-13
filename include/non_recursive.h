@@ -5,24 +5,26 @@
 using namespace std;
 
 // 链栈
-typedef struct {
+typedef struct box {
     int i = -1;
     int j = -1;
-    int di;
+    int di{};
 } box;
 typedef struct a {
     box date;
-    struct a *next;
+    struct a *next{};
 } sqstack;
 
 void initstack(sqstack *&s) {
+    // 初始化栈
     s = (sqstack *) malloc(sizeof(sqstack));
-    s->next = NULL;
+    s->next = nullptr;
 }
 
 void destorystack(sqstack *&s) {
+    // 释放栈的内存空间
     sqstack *pre = s, *p = s->next;
-    while (p != NULL) {
+    while (p != nullptr) {
 
         free(pre);
         pre = p;
@@ -32,10 +34,12 @@ void destorystack(sqstack *&s) {
 }
 
 bool stackempty(sqstack *s) {
-    return (s->next == NULL);
+    // 判栈空
+    return (s->next == nullptr);
 }
 
 void push(sqstack *&s, box &e) {
+    // 压入栈
     sqstack *p;
     p = (sqstack *) malloc(sizeof(sqstack));
     p->date = e;
@@ -44,8 +48,9 @@ void push(sqstack *&s, box &e) {
 }
 
 bool pop(sqstack *&s, box &e) {
+    // 取出栈
     sqstack *p;
-    if (s->next == NULL)
+    if (s->next == nullptr)
         return false;
     p = s->next;
     e = p->date;
@@ -55,12 +60,14 @@ bool pop(sqstack *&s, box &e) {
 }
 
 bool gettop(sqstack *&s, box &e) {
+    // 取栈顶
     e = s->next->date;
     return true;
 }
 // 链栈
 
 int context_Compared(int x1, int y1, int x2, int y2) {
+    // 对比两个前后路径，返回方向
     //printf("%d,%d,%d,%d",x1,y1,x2,y2);
     if (x2 == -1 && y2 == -1) {
         //已完成寻路
@@ -88,7 +95,8 @@ int context_Compared(int x1, int y1, int x2, int y2) {
 
 // https://blog.csdn.net/wyh1618/article/details/83547074?utm_medium=distribute.pc_relevant.none-task-blog-baidujs_title-1&spm=1001.2101.3001.4242
 
-bool strackMgpath(int xi, int yi, int xe, int ye, int **mg) {
+bool strack_maze_path(int xi, int yi, int xe, int ye, int **mg) {
+    // 栈&迷宫的核心函数，利用到了BFS（广度搜索）
     box path[maxsize], e;
     int i, j, di, il, jl, k;
     bool find;
@@ -98,7 +106,7 @@ bool strackMgpath(int xi, int yi, int xe, int ye, int **mg) {
     e.j = yi;
     e.di = -1;
     push(s, e);
-    mg[xi][yi] = -1;
+    mg[xi][yi] = -1; // 初始化迷宫
     while (!stackempty(s)) {
         gettop(s, e);
         i = e.i;
@@ -122,6 +130,7 @@ bool strackMgpath(int xi, int yi, int xe, int ye, int **mg) {
             destorystack(s);
             return true;
         }
+        // 栈重置
         find = false;
         while (di < 4 && !find) {
             di++;
@@ -142,6 +151,8 @@ bool strackMgpath(int xi, int yi, int xe, int ye, int **mg) {
                     il = i;
                     jl = j - 1;
                     break;
+                default:
+                    continue;
             }
             if (mg[il][jl] == 0)
                 find = true;
@@ -163,5 +174,5 @@ bool strackMgpath(int xi, int yi, int xe, int ye, int **mg) {
 }
 
 void RunAllAccessBFS(int xi, int yi, int xe, int ye, int **mg) {
-    strackMgpath(xi, yi, xe, ye, mg);
+    strack_maze_path(xi, yi, xe, ye, mg);
 }
