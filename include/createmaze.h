@@ -34,15 +34,31 @@ struct point {
 
 vector<block> myblock;
 int x_num=1,y_num=1;//矿工位置
-int G[100][100];
 
-void init(int xi,int yi) {
+//int G[1024][1024];
+int **G = nullptr;
+
+void init(int xi,int yi,int size) {
+    //初始化地图数组
+    G = new int*[size+2];
+    for(int i=0;i<size+2;i++)
+    {
+        G[i]=new int[size+2];
+    }
     //将地图全部置为墙
-    memset(G,WALL,sizeof(G));
+    //memset(G,WALL,sizeof(G));
+    for(int i=0;i<size+2;i++)
+    {
+        for(int j=0;j<size+2;j++)
+        {
+            G[i][j]=WALL;
+        }
+
+    }
     //定义起始点
-    G[xi][yi] = NOTHING;
-    start.x = xi;
-    start.y = yi;
+    G[xi+1][yi+1] = NOTHING;
+    start.x = xi+1;
+    start.y = yi+1;
 }
 void FindBlock() {
     //找出与当前位置相邻的墙
@@ -62,7 +78,7 @@ void FindBlock() {
 
 int createMaze(int xi,int yi,int size) {
     m = n = size;
-    init(xi,yi);
+    init(xi,yi,size);
     srand((unsigned)time(NULL));//随机数种子
     FindBlock();
     //第一步压入两堵墙（起点右边和起点下面）进入循环
@@ -108,29 +124,37 @@ int createMaze(int xi,int yi,int size) {
         //删除这堵墙(把用不了的墙删了，对于那些已经施工过了不必再施工了，同时也是确保我们能跳出循环)
         myblock.erase(myblock.begin()+randnum);
     }
-    ofstream out(".out.txt",ios::app);//app表示每次操作前均定位到文件末尾
+    ofstream out("out.txt",ios::out);//app表示每次操作前均定位到文件末尾
     out<<m<<endl;
-    out<<start.x-1<<" "<<start.y-1;
+    out<<start.x-1<<" "<<start.y-1<<endl;
     int randnumX = rand() % m;
     int randnumY = rand() % m;
     while (G[randnumX][randnumY] != NOTHING){
         randnumX = rand() % m;
         randnumY = rand() % m;
     }
-    out<<randnumX-1<<" "<<randnumX-1;
-    for (int i=0;i<=m+1;i++) {
-        for (int j=0;j<=n+1;j++) {
-            if(i == start.x && j == start.y) {
-                printf("%c%c",0xa7,0xb0 );
+    out<<randnumX-1<<" "<<randnumY-1<<endl;
+    for (int i=1;i<=m+1;i++) {
+        for (int j=1;j<=n+1;j++) {
+            if (i > m || j > m);
+            else if(i == start.x && j == start.y) {
+                printf("%c", '0');
+                out<<'0';
             }
             else if(G[i][j] == NOTHING) {
-                printf("  ");
+                printf("%c", '0');
+                out<<'0';
             }
             else {
-                printf("%c%c", 0xa8, 0x80);
+                printf("%c", '1');
+                out<<'1';
             }
         }
         printf("\n");
+        out<<'\n';
     }
+    out.close();
+
+    printf("迷宫的起点是:%d,%d 迷宫的终点是:%d,%d", start.x-1,start.y-1,randnumX-1,randnumY-1);
     return 0;
 }
