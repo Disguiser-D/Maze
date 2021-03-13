@@ -9,8 +9,8 @@
 #endif //MAZE_ALLMAZEACCESS_H
 
 
-#include <stdio.h>
-#include <string.h>
+#include <cstdio>
+#include <cstring>
 
 #define MaxSize 100
 /*#define M 4
@@ -97,6 +97,8 @@ void mgpath(int xi, int yi, int xe, int ye, PathType path, int **mg)
                         i = xi;
                         j = yi - 1;
                         break;
+                    default:
+                        continue;
                 }
                 path.data[path.length].i = xi;
                 path.data[path.length].j = yi;
