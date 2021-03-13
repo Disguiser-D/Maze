@@ -4,7 +4,7 @@
 #define maxsize 100
 using namespace std;
 
-// Á´Õ»
+// é“¾æ ˆ
 typedef struct box {
     int i = -1;
     int j = -1;
@@ -16,13 +16,13 @@ typedef struct a {
 } sqstack;
 
 void initstack(sqstack *&s) {
-    // ³õÊ¼»¯Õ»
+    // åˆå§‹åŒ–æ ˆ
     s = (sqstack *) malloc(sizeof(sqstack));
     s->next = nullptr;
 }
 
 void destorystack(sqstack *&s) {
-    // ÊÍ·ÅÕ»µÄÄÚ´æ¿Õ¼ä
+    // é‡Šæ”¾æ ˆçš„å†…å­˜ç©ºé—´
     sqstack *pre = s, *p = s->next;
     while (p != nullptr) {
 
@@ -34,12 +34,12 @@ void destorystack(sqstack *&s) {
 }
 
 bool stackempty(sqstack *s) {
-    // ÅĞÕ»¿Õ
+    // åˆ¤æ ˆç©º
     return (s->next == nullptr);
 }
 
 void push(sqstack *&s, box &e) {
-    // Ñ¹ÈëÕ»
+    // å‹å…¥æ ˆ
     sqstack *p;
     p = (sqstack *) malloc(sizeof(sqstack));
     p->date = e;
@@ -48,7 +48,7 @@ void push(sqstack *&s, box &e) {
 }
 
 bool pop(sqstack *&s, box &e) {
-    // È¡³öÕ»
+    // å–å‡ºæ ˆ
     sqstack *p;
     if (s->next == nullptr)
         return false;
@@ -60,31 +60,31 @@ bool pop(sqstack *&s, box &e) {
 }
 
 bool gettop(sqstack *&s, box &e) {
-    // È¡Õ»¶¥
+    // å–æ ˆé¡¶
     e = s->next->date;
     return true;
 }
-// Á´Õ»
+// é“¾æ ˆ
 
 int context_Compared(int x1, int y1, int x2, int y2) {
-    // ¶Ô±ÈÁ½¸öÇ°ºóÂ·¾¶£¬·µ»Ø·½Ïò
+    // å¯¹æ¯”ä¸¤ä¸ªå‰åè·¯å¾„ï¼Œè¿”å›æ–¹å‘
     //printf("%d,%d,%d,%d",x1,y1,x2,y2);
     if (x2 == -1 && y2 == -1) {
-        //ÒÑÍê³ÉÑ°Â·
+        //å·²å®Œæˆå¯»è·¯
         return 0;
     }
     if (x1 == x2) {
-        //×óÓÒÒÆ¶¯
+        //å·¦å³ç§»åŠ¨
         if (y2 < y1) {
-            //Ïò×óÒÆ¶¯
+            //å‘å·¦ç§»åŠ¨
             return 3;
         } else {
             return 1;
         }
     } else if (y1 == y2) {
-        //ÉÏÏÂÒÆ¶¯
+        //ä¸Šä¸‹ç§»åŠ¨
         if (x2 < x1) {
-            //ÏòÉÏÒÆ¶¯
+            //å‘ä¸Šç§»åŠ¨
             return 4;
         } else {
             return 2;
@@ -95,8 +95,8 @@ int context_Compared(int x1, int y1, int x2, int y2) {
 
 // https://blog.csdn.net/wyh1618/article/details/83547074?utm_medium=distribute.pc_relevant.none-task-blog-baidujs_title-1&spm=1001.2101.3001.4242
 
-bool strack_maze_path(int xi, int yi, int xe, int ye, int **mg) {
-    // Õ»&ÃÔ¹¬µÄºËĞÄº¯Êı£¬ÀûÓÃµ½ÁËBFS£¨¹ã¶ÈËÑË÷£©
+void strack_maze_path(int xi, int yi, int xe, int ye, int **mg) {
+    // æ ˆ&è¿·å®«çš„æ ¸å¿ƒå‡½æ•°ï¼Œåˆ©ç”¨åˆ°äº†BFSï¼ˆå¹¿åº¦æœç´¢ï¼‰
     box path[maxsize], e;
     int i, j, di, il, jl, k;
     bool find;
@@ -106,31 +106,31 @@ bool strack_maze_path(int xi, int yi, int xe, int ye, int **mg) {
     e.j = yi;
     e.di = -1;
     push(s, e);
-    mg[xi][yi] = -1; // ³õÊ¼»¯ÃÔ¹¬
+    mg[xi][yi] = -1; // åˆå§‹åŒ–è¿·å®«
     while (!stackempty(s)) {
         gettop(s, e);
         i = e.i;
         j = e.j;
         di = e.di;
         if (xe == i && ye == j) {
-            cout << "\tÃÔ¹¬³ö¿ÚÎª:" << endl;
-            cout << "\t";
+            cout << "è¿·å®«å‡ºå£ä¸º:" << endl;
+//            cout << "\t";
             k = 0;
             while (!stackempty(s)) {
                 pop(s, e);
                 path[k++] = e;
             }
-            cout << "Èë¿Ú->";
+            cout << "\tå…¥å£->";
             while (k >= 1) {
                 k--;
                 cout << "(" << path[k].i << ',' << path[k].j << ','
                      << context_Compared(path[k].i, path[k].j, path[k + 1].i, path[k + 1].j) << "),";
             }
-            cout << ">-³ö¿Ú" << endl;
+            cout << ">-å‡ºå£" << endl;
             destorystack(s);
-            return true;
+//            return true;
         }
-        // Õ»ÖØÖÃ
+        // æ‰¾ä¸åˆ°çš„æ—¶å€™ï¼Œæ ˆé‡ç½®
         find = false;
         while (di < 4 && !find) {
             di++;
@@ -170,7 +170,7 @@ bool strack_maze_path(int xi, int yi, int xe, int ye, int **mg) {
         }
     }
     destorystack(s);
-    return false;
+//    return false;
 }
 
 void RunAllAccessBFS(int xi, int yi, int xe, int ye, int **mg) {
