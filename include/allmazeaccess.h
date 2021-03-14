@@ -33,7 +33,9 @@ typedef struct {
     int length;            //路径长度
 } PathType;                //定义路径类型
 int count = 0;            //存放迷宫路径的条数
-int test(int x1, int y1, int x2, int y2) {
+
+
+int findDirection(int x1, int y1, int x2, int y2) {
     //printf("%d,%d,%d,%d",x1,y1,x2,y2);
     if (x2 == -1 && y2 == -1) {
         //已完成寻路
@@ -56,6 +58,7 @@ int test(int x1, int y1, int x2, int y2) {
             return 2;
         }
     }
+    return -1;//发生异常
 }
 
 void mgpath(int xi, int yi, int xe, int ye, PathType path, int **mg)
@@ -70,7 +73,7 @@ void mgpath(int xi, int yi, int xe, int ye, PathType path, int **mg)
         printf("迷宫路径%d如下:\n", ++count);
         for (k = 0; k < path.length; k++)
             printf("\t(%d,%d,%d)", path.data[k].i - 1, path.data[k].j - 1,
-                   test(path.data[k].i, path.data[k].j, path.data[k + 1].i, path.data[k + 1].j));
+                   findDirection(path.data[k].i, path.data[k].j, path.data[k + 1].i, path.data[k + 1].j));
         printf("\n");
     } else                        //(xi,yi)不是出口
     {
@@ -110,6 +113,12 @@ void mgpath(int xi, int yi, int xe, int ye, PathType path, int **mg)
     }
 }
 
+
+/*
+ * Describe:求解迷宫的所有路径
+ * Parameter:int(起点坐标X轴),int(起点坐标y轴),int(终点坐标X轴),int(终点坐标y轴),int**(迷宫二维数组)
+ * Return:void(输出结果)
+ */
 void RunAllAccessDFS(int xi, int yi, int xe, int ye, int **mg) {
     PathType path;
     path.length = 0;                //初始化路径长度

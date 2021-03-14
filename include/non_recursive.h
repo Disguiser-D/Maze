@@ -4,7 +4,7 @@
 #define maxsize 100
 using namespace std;
 
-// Á´Õ»
+// é“¾æ ˆ
 typedef struct {
     int i = -1;
     int j = -1;
@@ -58,26 +58,26 @@ bool gettop(sqstack *&s, box &e) {
     e = s->next->date;
     return true;
 }
-// Á´Õ»
+// é“¾æ ˆ
 
 int context_Compared(int x1, int y1, int x2, int y2) {
     //printf("%d,%d,%d,%d",x1,y1,x2,y2);
     if (x2 == -1 && y2 == -1) {
-        //ÒÑÍê³ÉÑ°Â·
+        //å·²å®Œæˆå¯»è·¯
         return 0;
     }
     if (x1 == x2) {
-        //×óÓÒÒÆ¶¯
+        //å·¦å³ç§»åŠ¨
         if (y2 < y1) {
-            //Ïò×óÒÆ¶¯
+            //å‘å·¦ç§»åŠ¨
             return 3;
         } else {
             return 1;
         }
     } else if (y1 == y2) {
-        //ÉÏÏÂÒÆ¶¯
+        //ä¸Šä¸‹ç§»åŠ¨
         if (x2 < x1) {
-            //ÏòÉÏÒÆ¶¯
+            //å‘ä¸Šç§»åŠ¨
             return 4;
         } else {
             return 2;
@@ -104,20 +104,20 @@ bool strackMgpath(int xi, int yi, int xe, int ye, int **mg) {
         j = e.j;
         di = e.di;
         if (xe == i && ye == j) {
-            cout << "\tÃÔ¹¬³ö¿ÚÎª:" << endl;
+            cout << "\tè¿·å®«å‡ºå£ä¸º:" << endl;
             cout << "\t";
             k = 0;
             while (!stackempty(s)) {
                 pop(s, e);
                 path[k++] = e;
             }
-            cout << "Èë¿Ú->";
+            cout << "å…¥å£->";
             while (k >= 1) {
                 k--;
                 cout << "(" << path[k].i << ',' << path[k].j << ','
                      << context_Compared(path[k].i, path[k].j, path[k + 1].i, path[k + 1].j) << "),";
             }
-            cout << ">-³ö¿Ú" << endl;
+            cout << ">-å‡ºå£" << endl;
             destorystack(s);
             return true;
         }

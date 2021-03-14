@@ -76,6 +76,11 @@ void FindBlock() {
     }
 }
 
+/*
+ * Describe:随机生成一个迷宫
+ * Parameter:int(起点X轴),int(起点y轴),int(迷宫大小尺寸)
+ * Return:int(返回0表示程序运行正常)
+ */
 int createMaze(int xi,int yi,int size) {
     m = n = size;
     init(xi,yi,size);

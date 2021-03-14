@@ -11,7 +11,11 @@
 #include <malloc.h>
 #include <windows.h>
 
-
+/*
+ * Describe:检查用户输入是否正确
+ * Parameter:String(用户输入的字符串)
+ * Return:bool(返回true则输入正常，返回false则输入异常)
+ */
 bool checkInuPut(const std::string& userInput)
 {
     try{
@@ -59,6 +63,11 @@ int checkOS()
     return os_flag;
 }
 
+/*
+ * Describe:将一个迷宫打印出来
+ * Parameter:int**(用动态二维数组表示的迷宫)
+ * Return:void(打印出迷宫)
+ */
 void showMaze(int** maze)
 {
     //system("mode con cols=198 lines=150");
