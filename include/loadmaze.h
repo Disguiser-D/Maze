@@ -19,7 +19,6 @@
 int **CreateMaze(const std::string &fileName) {
     std::fstream inFile(fileName, std::ios::in);
     if (!inFile)std::cout << "文件打开失败" << std::endl;
-    std::string aa = fileName;
     //读取迷宫大小
     int mazeSize, xi, yi, xe, ye;
     inFile >> mazeSize;
