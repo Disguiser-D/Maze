@@ -7,20 +7,13 @@
 #include "include/non_recursive.h"
 
 int main() {
-    string file = "Maze_nonrecursive.txt";
-    int **b = CreateMaze(file);
-    if (b == nullptr) return -1;
-    RunAllAccessDFS(LoadStartX("333.txt"),LoadStartY("333.txt"),LoadEndX("333.txt"),LoadEndY("333.txt"), b);
-
-    showMaze(b);
-    //std::cin>>a;
-    //std::cout<<checkInuPut(a);
-    RunAllAccessBFS(LoadStartX(file), LoadStartY(file), LoadEndX(file), LoadEndY(file), b);
-//    for(unsigned int i=0;i<=8;i++) {
-//        std::cout<<b[i][i]<<endl;
-//    }
+    string file = "Maze.txt";
+    int **Maze = CreateMaze(file);
+    if (Maze == nullptr) return -1;
+    showMaze(Maze);
+    RunAllAccessDFS(LoadStartX(file), LoadStartY(file), LoadEndX(file), LoadEndY(file), Maze);
+    RunAllAccessBFS(LoadStartX(file), LoadStartY(file), LoadEndX(file), LoadEndY(file), Maze);
+    return 0;
 }
-//    if (b == nullptr) return -1;
-//    RunAllAccessDFS(LoadStartX("333.txt"), LoadStartY("333.txt"), LoadEndX("333.txt"), LoadEndY("333.txt"), b);
-//}
+
 
