@@ -7,12 +7,16 @@
 #include "include/non_recursive.h"
 
 int main() {
-    string file = "Maze.txt";
+    string file = "out.txt";
     int **Maze = CreateMaze(file);
     if (Maze == nullptr) return -1;
     showMaze(Maze);
-    RunAllAccessDFS(LoadStartX(file), LoadStartY(file), LoadEndX(file), LoadEndY(file), Maze);
-    RunAllAccessBFS(LoadStartX(file), LoadStartY(file), LoadEndX(file), LoadEndY(file), Maze);
+    //createMaze(1,3,20);
+    //RunAllAccessDFS(LoadStartX(file), LoadStartY(file), LoadEndX(file), LoadEndY(file), Maze);
+    //RunAllAccessBFS(LoadStartX(file), LoadStartY(file), LoadEndX(file), LoadEndY(file), Maze);
+    while (1){
+        int i=3;
+    }
     return 0;
 }
 

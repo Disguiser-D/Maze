@@ -144,15 +144,15 @@ int createMaze(int xi,int yi,int size) {
             if (i > m || j > m);
             else if(i == start.x && j == start.y) {
                 printf("%c", '0');
-                out<<'0';
+                out<<"0 ";
             }
             else if(G[i][j] == NOTHING) {
                 printf("%c", '0');
-                out<<'0';
+                out<<"0 ";
             }
             else {
                 printf("%c", '1');
-                out<<'1';
+                out<<"1 ";
             }
         }
         printf("\n");

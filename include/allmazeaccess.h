@@ -12,7 +12,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#define MaxSize 100
+#define MaxSize 10000
 /*#define M 4
 #define N 4
 int mg[M+2][N+2]=
