@@ -103,17 +103,13 @@ void showMaze(int** maze)
 
 
     char title[260];
-    if (GetConsoleTitle(title, 260))
-        cout << title << endl;
-    else
-        cout << "FAILURE" << endl;
+    if (GetConsoleTitle(title, 260));
+    else cout << "获取句柄失败" << endl;
 
     char randomTitle[258];
 
 
     randStr(randomTitle, 256);
-
-    int aa =3;
 
     SetConsoleTitle(randomTitle);
 
@@ -122,8 +118,6 @@ void showMaze(int** maze)
     HWND hwnd = FindWindow(NULL, randomTitle);
 
     ShowWindow(hwnd,SW_MAXIMIZE);
-
-    cout << title << endl;
 
     SetConsoleTitle(title);
 
