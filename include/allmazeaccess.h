@@ -12,7 +12,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#define MaxSize 10000
+#define MaxSize 1000
 /*#define M 4
 #define N 4
 int mg[M+2][N+2]=
@@ -64,6 +64,15 @@ int findDirection(int x1, int y1, int x2, int y2) {
 void mgpath(int xi, int yi, int xe, int ye, PathType path, int **mg)
 //求解路径为:(xi,yi)->(xe,ye)
 {
+    /*for(int i = 0; i < 22; i++)
+    {
+        for(int j = 0; j < 22; j++)
+        {
+            std::cout<<mg[i][j]<<" ";
+        }
+        std::cout<<std::endl;
+    }*/
+    //std::cout<<std::endl;
     int di, k, i, j;
     if (xi == xe && yi == ye)        //找到了出口,输出路径
     {

@@ -103,7 +103,7 @@ int LoadEndX(const std::string &fileName) {
     std::fstream inFile(fileName, std::ios::in);
     if (!inFile)std::cout << "文件打开失败" << std::endl;
 
-    inFile.seekg(std::ios::beg + 6);  // 偏移文件指针，直接定位到文本中的迷宫数据，提升效率
+    inFile.seekg(std::ios::beg + 9);  // 偏移文件指针，直接定位到文本中的迷宫数据，提升效率
 
     int xe;
     inFile >> xe;
@@ -119,7 +119,7 @@ int LoadEndY(const std::string &fileName) {
     std::fstream inFile(fileName, std::ios::in);
     if (!inFile)std::cout << "文件打开失败" << std::endl;
 
-    inFile.seekg(std::ios::beg + 9);  // 偏移文件指针，直接定位到文本中的迷宫数据，提升效率
+    inFile.seekg(std::ios::beg + 11);  // 偏移文件指针，直接定位到文本中的迷宫数据，提升效率
 
     int ye;
     inFile >> ye;
