@@ -78,10 +78,10 @@ void FindBlock() {
 
 /*
  * Describe:随机生成一个迷宫
- * Parameter:int(起点X轴),int(起点y轴),int(迷宫大小尺寸)
+ * Parameter:int(起点X轴),int(起点y轴),int(迷宫大小尺寸),string(输出的文件名)
  * Return:int(返回0表示程序运行正常)
  */
-int createMaze(int xi,int yi,int size) {
+int createMaze(int xi,int yi,int size,string fileName) {
     m = n = size;
     init(xi,yi,size);
     srand((unsigned)time(NULL));//随机数种子
@@ -129,7 +129,8 @@ int createMaze(int xi,int yi,int size) {
         //删除这堵墙(把用不了的墙删了，对于那些已经施工过了不必再施工了，同时也是确保我们能跳出循环)
         myblock.erase(myblock.begin()+randnum);
     }
-    ofstream out("out.txt",ios::out);//app表示每次操作前均定位到文件末尾
+    if (fileName.empty()) fileName = "out.txt";
+    ofstream out(fileName,ios::out);//app表示每次操作前均定位到文件末尾
     out<<m<<endl;
     out<<start.x-1<<" "<<start.y-1<<endl;
     int randnumX = rand() % m;
@@ -139,20 +140,21 @@ int createMaze(int xi,int yi,int size) {
         randnumY = rand() % m;
     }
     out<<randnumX-1<<" "<<randnumY-1<<endl;
+    printf("生成的迷宫如下图所示(1为墙，0为路)\n");
     for (int i=1;i<=m+1;i++) {
         for (int j=1;j<=n+1;j++) {
             if (i > m || j > m);
             else if(i == start.x && j == start.y) {
                 printf("%c", '0');
-                out<<'0';
+                out<<"0 ";
             }
             else if(G[i][j] == NOTHING) {
                 printf("%c", '0');
-                out<<'0';
+                out<<"0 ";
             }
             else {
                 printf("%c", '1');
-                out<<'1';
+                out<<"1 ";
             }
         }
         printf("\n");
@@ -160,6 +162,7 @@ int createMaze(int xi,int yi,int size) {
     }
     out.close();
 
-    printf("迷宫的起点是:%d,%d 迷宫的终点是:%d,%d", start.x-1,start.y-1,randnumX-1,randnumY-1);
+    printf("迷宫的起点是:%d,%d 迷宫的终点是:%d,%d \n", start.x-1,start.y-1,randnumX-1,randnumY-1);
+    printf("\n\n");
     return 0;
 }

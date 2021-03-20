@@ -63,6 +63,29 @@ int checkOS()
     return os_flag;
 }
 
+char *randStr(char *str, const int len)
+{
+    srand(time(NULL));
+    int i;
+    for (i = 0; i < len; ++i)
+    {
+        switch ((rand() % 3))
+        {
+            case 1:
+                str[i] = 'A' + rand() % 26;
+                break;
+            case 2:
+                str[i] = 'a' + rand() % 26;
+                break;
+            default:
+                str[i] = '0' + rand() % 10;
+                break;
+        }
+    }
+    str[++i] = '\0';
+    return str;
+}
+
 /*
  * Describe:将一个迷宫打印出来
  * Parameter:int**(用动态二维数组表示的迷宫)
@@ -73,9 +96,31 @@ void showMaze(int** maze)
     //system("mode con cols=198 lines=150");
 
 
-    HWND hwnd=GetForegroundWindow();//获取当前进程的句柄
+    //HWND hwnd=GetForegroundWindow();//获取当前进程的句柄
+
+
+    //ShowWindow(hwnd,SW_MAXIMIZE);
+
+
+    char title[260];
+    if (GetConsoleTitle(title, 260));
+    else cout << "获取句柄失败" << endl;
+
+    char randomTitle[258];
+
+
+    randStr(randomTitle, 256);
+
+    SetConsoleTitle(randomTitle);
+
+    Sleep(40);
+
+    HWND hwnd = FindWindow(NULL, randomTitle);
 
     ShowWindow(hwnd,SW_MAXIMIZE);
+
+    SetConsoleTitle(title);
+
 
     int size = 0;
 
@@ -88,6 +133,7 @@ void showMaze(int** maze)
     }
     if (size>=100) printf("迷宫太大，无法显示");
     else{
+        printf("\n");
         for(int i=0;i<size;i++)
         {
             for(int j=0;j<size;j++)
@@ -97,7 +143,7 @@ void showMaze(int** maze)
                 else if (i == 0) j>10?(j%2!=0?printf("%d",j-1):printf("  ")):printf("%d ",j-1);
                 else if (j == 0) i>10?printf("%d ",i-1):printf("%d  ",i-1);
                     //cout<<maze[i][j]<<endl;
-                else if (maze[i][j] == 1) std::cout<<"▉";
+                else if (maze[i][j] == 1) std::cout<<"■";
                 else if (maze[i][j] == 0) std::cout<<"  ";
                 //std::cout<<m[i][j];
             }
