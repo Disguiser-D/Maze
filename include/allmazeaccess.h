@@ -80,9 +80,11 @@ void mgpath(int xi, int yi, int xe, int ye, PathType path, int **mg)
         path.data[path.length].j = yi;
         path.length++;
         printf("迷宫路径%d如下:\n", ++count);
-        for (k = 0; k < path.length; k++)
-            printf("\t(%d,%d,%d)", path.data[k].i - 1, path.data[k].j - 1,
+        for (k = 0; k < path.length; k++) {
+            printf("(%d,%d,%d)", path.data[k].i - 1, path.data[k].j - 1,
                    findDirection(path.data[k].i, path.data[k].j, path.data[k + 1].i, path.data[k + 1].j));
+            printf("  ");
+        }
         printf("\n");
     } else                        //(xi,yi)不是出口
     {
