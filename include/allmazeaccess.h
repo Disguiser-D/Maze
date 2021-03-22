@@ -12,7 +12,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#define MaxSize 1000
+#define MaxSize 550
 /*#define M 4
 #define N 4
 int mg[M+2][N+2]=
@@ -131,6 +131,7 @@ void mgpath(int xi, int yi, int xe, int ye, PathType path, int **mg)
  * Return:void(输出结果)
  */
 void RunAllAccessDFS(int xi, int yi, int xe, int ye, int **mg) {
+    std::cout<<xi<<yi<<xe<<ye<<std::endl;
     PathType path;
     path.length = 0;                //初始化路径长度
     memset(path.data, -1, MaxSize);

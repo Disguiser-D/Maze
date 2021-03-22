@@ -71,10 +71,16 @@ int LoadStartX(const std::string &fileName) {
     std::fstream inFile(fileName, std::ios::in);
     if (!inFile)std::cout << "文件打开失败" << std::endl;
 
-    inFile.seekg(std::ios::beg + 2);  // 偏移文件指针，直接定位到文本中的迷宫数据，提升效率
+    /*inFile.seekg(std::ios::beg + 2);  // 偏移文件指针，直接定位到文本中的迷宫数据，提升效率
 
     int xi;
-    inFile >> xi;
+    inFile >> xi;*/
+    int mazeSize, xi, yi, xe, ye;
+    inFile >> mazeSize;
+
+    //读取迷宫的起点和终点数据
+    inFile >> xi >> yi;
+    inFile >> xe >> ye;
     return xi + 1;
 }
 
@@ -87,10 +93,16 @@ int LoadStartY(const std::string &fileName) {
     std::fstream inFile(fileName, std::ios::in);
     if (!inFile)std::cout << "文件打开失败" << std::endl;
 
-    inFile.seekg(std::ios::beg + 4);  // 偏移文件指针，直接定位到文本中的迷宫数据，提升效率
+    /*inFile.seekg(std::ios::beg + 4);  // 偏移文件指针，直接定位到文本中的迷宫数据，提升效率
 
     int yi;
-    inFile >> yi;
+    inFile >> yi;*/
+    int mazeSize, xi, yi, xe, ye;
+    inFile >> mazeSize;
+
+    //读取迷宫的起点和终点数据
+    inFile >> xi >> yi;
+    inFile >> xe >> ye;
     return yi + 1;
 }
 
@@ -103,10 +115,16 @@ int LoadEndX(const std::string &fileName) {
     std::fstream inFile(fileName, std::ios::in);
     if (!inFile)std::cout << "文件打开失败" << std::endl;
 
-    inFile.seekg(std::ios::beg + 9);  // 偏移文件指针，直接定位到文本中的迷宫数据，提升效率
+    /*inFile.seekg(std::ios::beg + 9);  // 偏移文件指针，直接定位到文本中的迷宫数据，提升效率
 
     int xe;
-    inFile >> xe;
+    inFile >> xe;*/
+    int mazeSize, xi, yi, xe, ye;
+    inFile >> mazeSize;
+
+    //读取迷宫的起点和终点数据
+    inFile >> xi >> yi;
+    inFile >> xe >> ye;
     return xe + 1;
 }
 
@@ -119,10 +137,16 @@ int LoadEndY(const std::string &fileName) {
     std::fstream inFile(fileName, std::ios::in);
     if (!inFile)std::cout << "文件打开失败" << std::endl;
 
-    inFile.seekg(std::ios::beg + 11);  // 偏移文件指针，直接定位到文本中的迷宫数据，提升效率
+    /*inFile.seekg(std::ios::beg + 11);  // 偏移文件指针，直接定位到文本中的迷宫数据，提升效率
 
     int ye;
-    inFile >> ye;
+    inFile >> ye;*/
+    int mazeSize, xi, yi, xe, ye;
+    inFile >> mazeSize;
+
+    //读取迷宫的起点和终点数据
+    inFile >> xi >> yi;
+    inFile >> xe >> ye;
     return ye + 1;
 }
 

@@ -48,6 +48,7 @@ int main() {
                 showMaze(Maze);
                 RunAllAccessDFS(LoadStartX(fileName), LoadStartY(fileName), LoadEndX(fileName), LoadEndY(fileName),
                                 Maze);
+                delete Maze;
             }
         } else if (userInput == "3") {
             cout << "请输入要求解的迷宫文件(直接回车默认文件名为out.txt):";
@@ -60,11 +61,12 @@ int main() {
                 showMaze(Maze);
                 RunAllAccessBFS(LoadStartX(fileName), LoadStartY(fileName), LoadEndX(fileName), LoadEndY(fileName),
                                 Maze);
+                delete Maze;
             }
         } else if (userInput == "4") {
             return 0;
         } else if (userInput.empty()){
-            cout<<"test";
+            cout<<"";
         } else {
             cout << "非法输入，请检查你的输入"<<endl;
             userInput = "";
