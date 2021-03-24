@@ -2,7 +2,7 @@
 #include<malloc.h>
 #include <windows.h>
 
-#define maxsize 100
+#define maxsize 1000
 using namespace std;
 
 // 链栈
@@ -100,7 +100,7 @@ void strackMgpath(int xi, int yi, int xe, int ye, int **mg) {
     // 栈与迷宫主函数
     box path[maxsize], e;
     int i, j, di, il, jl, k;
-    bool find;
+    bool find, dead_flag;
     sqstack *s;
     initstack(s);
     e.i = xi;
@@ -115,7 +115,7 @@ void strackMgpath(int xi, int yi, int xe, int ye, int **mg) {
         di = e.di;
         if (xe == j && ye == i) {
             // xe是纵 ye是横
-            cout << "迷宫出口为:" << endl;
+//            cout << "迷宫出口为:" << endl;
 //            cout << "\t";
             k = 0;
             while (!stackempty(s)) {
@@ -124,13 +124,13 @@ void strackMgpath(int xi, int yi, int xe, int ye, int **mg) {
 //                cout<<k;
                 path[k++] = e;
             }
-            cout << "\t入口->";
+//            cout << "\t入口->";
             while (k >= 1) {
                 k--;
-                cout << "(" << path[k].i << "," << path[k].j << ","
-                     << context_Compared(path[k].i, path[k].j, path[k + 1].i, path[k + 1].j) << ")";
+                printf("(%d,%d,%d)", path[k].j, path[k].i,
+                       context_Compared(path[k].j, path[k].i, path[k + 1].j, path[k + 1].i));
             }
-            cout << ">-出口" << endl;
+//            cout << ">-出口" << endl;
             destorystack(s);
 //            return true;
         }
@@ -138,47 +138,63 @@ void strackMgpath(int xi, int yi, int xe, int ye, int **mg) {
         // 迷宫方向寻找
         while (di < 4 && !find) {
             find = false; // 建议每次内循环重置find
+            if (di >= 4) di = -1;
             di++;
+            if (jl == xe && il == ye) {
+//                cout << "终点" << endl;
+                break;
+            }
             switch (di) {
                 case 0:
-                    // 向左移动
+                    // 向上移动
                     il = i - 1;
                     jl = j;
                     break;
                 case 1:
-                    // 向上移动
+                    // 向右移动
                     il = i;
                     jl = j + 1;
                     break;
                 case 2:
-                    // 向右移动
+                    // 向下移动
                     il = i + 1;
                     jl = j;
                     break;
                 case 3:
-                    // 向下移动
+                    // 向左移动
                     il = i;
                     jl = j - 1;
                     break;
                 default:
                     continue;
             }
-            if (mg[il][jl] == 0)
+            if (mg[il][jl] == 0) {
                 // 找到0就是通路
                 find = true;
+                dead_flag = true;
+            } else if (dead_flag && mg[il][jl] == -1) {
+                find = true;
+            }
         }
         if (find) {
             // 移动链栈指针，数据：二维数组
             s->data.di = di;  // 数据下一步走向
+//            cout << "di=" << di << endl;
             e.i = il;
             e.j = jl;
+//            cout << jl << "," << il << "," << di << "(" << mg[il][jl] << endl;
             e.di = -1; // 清空走向
             push(s, e); // 压栈
-            mg[il][jl] = -1; // 走过的路赋值为-1
+            if (!dead_flag) mg[il][jl] = -1; // 走过的路赋值为-1
+            else mg[il][jl] = -2;
         } else {
+//            cout << "找不到路了" << endl;
+//            cout << jl << "," << il << "," << di << "(-" << mg[il][jl] << endl;
             // 当找不到任何出路时才调用
             pop(s, e); // 出栈
-            mg[e.i][e.j] = 0; // 标记出口
+            e.di = -1; // 清空走向
+            mg[e.i][e.j] = -2; // 表示死路倒车
+            dead_flag = true;
         }
     }
     destorystack(s); // 释放栈内存
@@ -186,6 +202,7 @@ void strackMgpath(int xi, int yi, int xe, int ye, int **mg) {
 }
 
 void RunAllAccessBFS(int xi, int yi, int xe, int ye, int **mg) {
-    std::cout<<xi<<yi<<xe<<ye<<endl;
+    ye = 40;
+    std::cout << xi << yi << xe << ye << endl;
     strackMgpath(xi, yi, xe, ye, mg);
 }
