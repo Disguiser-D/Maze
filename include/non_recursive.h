@@ -202,7 +202,5 @@ void strackMgpath(int xi, int yi, int xe, int ye, int **mg) {
 }
 
 void RunAllAccessBFS(int xi, int yi, int xe, int ye, int **mg) {
-    ye = 40;
-    std::cout << xi << yi << xe << ye << endl;
     strackMgpath(xi, yi, xe, ye, mg);
 }
