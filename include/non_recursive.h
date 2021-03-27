@@ -69,10 +69,10 @@ bool gettop(sqstack *&s, box &e) {
 
 int context_Compared(int x1, int y1, int x2, int y2) {
     // 简单的前后路径对比，得出方向
-    //printf("%d,%d,%d,%d",x1,y1,x2,y2);
+//    printf("%d,%d,%d,%d",x1,y1,x2,y2);
     if (x2 == -1 && y2 == -1) {
         //已完成寻路
-        return 0;
+        return -1;
     }
     if (x1 == x2) {
         //左右移动
@@ -86,7 +86,7 @@ int context_Compared(int x1, int y1, int x2, int y2) {
         //上下移动
         if (x2 < x1) {
             //向上移动
-            return 4;
+            return 0;
         } else {
             return 2;
         }
@@ -127,10 +127,10 @@ void strackMgpath(int xi, int yi, int xe, int ye, int **mg) {
 //            cout << "\t入口->";
             while (k >= 1) {
                 k--;
-                printf("(%d,%d,%d)", path[k].j, path[k].i,
-                       context_Compared(path[k].j, path[k].i, path[k + 1].j, path[k + 1].i));
+                printf("(%d,%d,%d)", path[k].i, path[k].j,
+                       context_Compared(path[k].i, path[k].j, path[k - 1].i, path[k - 1].j));
             }
-//            cout << ">-出口" << endl;
+            cout << endl;
             destorystack(s);
 //            return true;
         }
