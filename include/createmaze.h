@@ -56,6 +56,8 @@ void init(int xi,int yi,int size) {
 
     }
     //定义起始点
+    x_num=xi+1;
+    y_num=yi+1;
     G[xi+1][yi+1] = NOTHING;
     start.x = xi+1;
     start.y = yi+1;
@@ -161,7 +163,6 @@ int createMaze(int xi,int yi,int size,string fileName) {
         out<<'\n';
     }
     out.close();
-
     printf("迷宫的起点是:%d,%d 迷宫的终点是:%d,%d \n", start.x-1,start.y-1,randnumX-1,randnumY-1);
     printf("\n\n");
     return 0;

@@ -22,19 +22,19 @@ bool checkInuPut(const std::string& userInput)
         int userInputNumber = std::stoi(userInput);
     }catch (std::invalid_argument&){
         // if no conversion could be performed
-        cout << "无效参数" << endl;
+        std::cout << "无效参数" << std::endl;
         return false;
     }
     catch (std::out_of_range&){
         // if the converted value would fall out of the range of the result type
         // or if the underlying function (std::strtol or std::strtoull) sets errno
         // to ERANGE.
-        cout << "超出范围" << endl;
+        std::cout << "超出范围" << std::endl;
         return false;
     }
     catch (...) {
         // everything else
-        cout << "未知错误" << endl;
+        std::cout << "未知错误" << std::endl;
         return false;
     }
     return true;
@@ -104,7 +104,7 @@ void showMaze(int** maze)
 
     char title[260];
     if (GetConsoleTitle(title, 260));
-    else cout << "获取句柄失败" << endl;
+    else std::cout << "获取句柄失败" << std::endl;
 
     char randomTitle[258];
 
@@ -127,29 +127,27 @@ void showMaze(int** maze)
     if (checkOS() == 3 || checkOS() == 4) {
         size_t size_tmp = _msize(maze);
         size = (int)size_tmp / 4;
+        if (size>=100) printf("迷宫太大，无法显示");
+        else{
+            printf("\n");
+            for(int i=0;i<size;i++)
+            {
+                for(int j=0;j<size;j++)
+                {
+                    if (i == 0 && j == 0) std::cout<<"   ";
+                    else if (i > size-2 || j > size - 2);
+                    else if (i == 0) j>10?(j%2!=0?printf("%d",j-1):printf("  ")):printf("%d ",j-1);
+                    else if (j == 0) i>10?printf("%d ",i-1):printf("%d  ",i-1);
+                    else if (maze[i][j] == 1) std::cout<<"■";
+                    else if (maze[i][j] == 0) std::cout<<"  ";
+                }
+                std::cout<<std::endl;
+
+            }
+        }
     }
     else {
         printf("只支持windows系统");
-    }
-    if (size>=100) printf("迷宫太大，无法显示");
-    else{
-        printf("\n");
-        for(int i=0;i<size;i++)
-        {
-            for(int j=0;j<size;j++)
-            {
-                if (i == 0 && j == 0) std::cout<<"   ";
-                else if (i > size-2 || j > size - 2);
-                else if (i == 0) j>10?(j%2!=0?printf("%d",j-1):printf("  ")):printf("%d ",j-1);
-                else if (j == 0) i>10?printf("%d ",i-1):printf("%d  ",i-1);
-                    //cout<<maze[i][j]<<endl;
-                else if (maze[i][j] == 1) std::cout<<"■";
-                else if (maze[i][j] == 0) std::cout<<"  ";
-                //std::cout<<m[i][j];
-            }
-            std::cout<<std::endl;
-
-        }
     }
 }
 
