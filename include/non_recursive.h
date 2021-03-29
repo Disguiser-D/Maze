@@ -113,7 +113,7 @@ void strackMgpath(int xi, int yi, int xe, int ye, int **mg) {
         i = e.i;
         j = e.j;
         di = e.di;
-        if (xe == j && ye == i) {
+        if (xe == i && ye == j) {
             // xe是纵 ye是横
 //            cout << "迷宫出口为:" << endl;
 //            cout << "\t";
@@ -127,7 +127,7 @@ void strackMgpath(int xi, int yi, int xe, int ye, int **mg) {
 //            cout << "\t入口->";
             while (k >= 1) {
                 k--;
-                printf("(%d,%d,%d)", path[k].i, path[k].j,
+                printf("(%d,%d,%d)", path[k].i - 1, path[k].j - 1,
                        context_Compared(path[k].i, path[k].j, path[k - 1].i, path[k - 1].j));
             }
             cout << endl;
@@ -171,10 +171,15 @@ void strackMgpath(int xi, int yi, int xe, int ye, int **mg) {
             if (mg[il][jl] == 0) {
                 // 找到0就是通路
                 find = true;
+                dead_flag = false;
+            } else if(dead_flag && mg[il][jl] == -1){
                 dead_flag = true;
-            } else if (dead_flag && mg[il][jl] == -1) {
-                find = true;
             }
+        }
+        if (dead_flag){
+            pop(s, e); // 出栈
+            mg[e.i][e.j] = -2; // 表示死路倒车
+            continue;
         }
         if (find) {
             // 移动链栈指针，数据：二维数组
@@ -185,14 +190,14 @@ void strackMgpath(int xi, int yi, int xe, int ye, int **mg) {
 //            cout << jl << "," << il << "," << di << "(" << mg[il][jl] << endl;
             e.di = -1; // 清空走向
             push(s, e); // 压栈
-            if (!dead_flag) mg[il][jl] = -1; // 走过的路赋值为-1
-            else mg[il][jl] = -2;
+            mg[il][jl] = -1; // 走过的路赋值为-1
         } else {
 //            cout << "找不到路了" << endl;
+//            cout << "di=" << e.di << endl;
 //            cout << jl << "," << il << "," << di << "(-" << mg[il][jl] << endl;
             // 当找不到任何出路时才调用
             pop(s, e); // 出栈
-            e.di = -1; // 清空走向
+//            e.di = -1; // 清空走向
             mg[e.i][e.j] = -2; // 表示死路倒车
             dead_flag = true;
         }
@@ -202,5 +207,6 @@ void strackMgpath(int xi, int yi, int xe, int ye, int **mg) {
 }
 
 void RunAllAccessBFS(int xi, int yi, int xe, int ye, int **mg) {
+//    cout<<xe<<ye;
     strackMgpath(xi, yi, xe, ye, mg);
 }
